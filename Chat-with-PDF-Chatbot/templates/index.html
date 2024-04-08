@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Chat Application</title>
+    <style>
+        body {
+            background-color: #0c5ea9;
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        form input[type="file"] {
+            margin-right: 10px;
+        }
+
+        hr {
+            margin-top: 20px;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        form input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button[type="submit"] {
+            background-color: #28A745;
+        }
+
+        div {
+            margin-top: 10px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bluechip Technologies Asia</h1>
+        <h2>PDF Chat Application</h2>
+    </header>
+    <main>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".pdf" value="Upload">
+            <button type="submit">Upload PDF</button>
+        </form>
+
+        {% if file_details %}
+        <h2>Uploaded File Details</h2>
+        <p><strong>Filename:</strong> {{ file_details["Filename"] }}</p>
+        <p><strong>File size:</strong> {{ file_details["File size"] }} bytes</p>
+        <div>{{ pdf_view | safe }}</div>
+        {% endif %}
+
+        <hr>
+
+        <h2>Chat</h2>
+
+        <form method="POST">
+            <input type="text" name="user_input" placeholder="Enter your message...">
+            <button type="submit">Send</button>
+        </form>
+
+        <div>
+            {% for message in chat_history %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
